@@ -1,73 +1,65 @@
 ﻿using System;
 
-namespace CDS
+namespace SpiralPrint
 {
-    class Program
+    public class SpiralPrint
     {
-        public class XArray
+        public static void Main(String[] args)
         {
-            static int[] FirstDS;
-            static int midIndex;
+            int n = 2, i, side = n, x = 0, y = 0;
+            int[][] tab = new int[n][];
 
-            public XArray(int limit)
+
+            i = n * n;
+            for (int l = 0; l < n; l++)
             {
-                FirstDS = new int[limit];
-                midIndex = FirstDS.Length / 2;
+                tab[l] = new int[n];
             }
-
-            public static void beforeMid()
+            while (i >= 1)
             {
-                for (int i = 0; i <= midIndex; i++)
+                for (int j = 0; j < side; j++)
+                    tab[x][y++] = i--;
+                x++;
+                y--;
+                if (i >= 1)
                 {
-                    int j;
-                    bool mid = false;
-                    if (i == midIndex)
-                        mid = true;
-                    for (j = 0; j < i; j++)
-                        Console.Write(" ");
-                    FirstDS[i] = i;
-
-                    if (mid)
-                    {
-                        Console.WriteLine(FirstDS[i]);
-                        break;
-                    }
-
-                    Console.Write(FirstDS[i]);
-
-                    for (int k = i; k < FirstDS.Length - i - 1; k++)
-                        Console.Write(" ");
-                    Console.WriteLine(FirstDS[i]);
-
+                    for (int j = 0; j < side - 1; j++)
+                        tab[x++][y] = i--;
+                    x--;
+                    y--;
+                }
+                if (i >= 1)
+                {
+                    for (int j = 0; j < side - 1; j++)
+                        tab[x][y--] = i--;
+                    x--;
+                    y++;
+                }
+                if (i >= 1)
+                {
+                    for (int j = 0; j < side - 2; j++)
+                        tab[x--][y] = i--;
+                    y++;
+                    x++;
+                    side = side - 2;
 
                 }
-
             }
 
-            public static void afterMid()
+            for (i = 0; i < n; i++)
             {
-                int j;
-                for (int i = midIndex + 1; i < FirstDS.Length; i++)
+                for (int j = 0; j < n; j++)
                 {
-                    for (j = 0; j < FirstDS.Length - i; j++)
+                    if (tab[i][j] < 10)
                         Console.Write(" ");
-                    Console.Write(i);
+                    Console.Write(tab[i][j] + " ");
 
-                    for (int k = j + 1; k < i; k++)
-                        Console.Write(" ");
-                    Console.WriteLine(i.ToString());
                 }
-
+                Console.WriteLine();
             }
-        }
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Datasructures using C#");
-            Console.Write("Enter Array Limit : ");
-            XArray newArray = new XArray(Int32.Parse(Console.ReadLine()));
-            XArray.beforeMid();
-            XArray.afterMid();
             Console.ReadKey();
         }
+
     }
+
 }
