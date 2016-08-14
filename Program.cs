@@ -6,7 +6,7 @@ namespace SpiralPrint
     {
         public static void Main(String[] args)
         {
-            int n = 2, i, side = n, x = 0, y = 0;
+            int n = 4, i, side = n, x = 0, y = 0;
             int[][] tab = new int[n][];
 
 
